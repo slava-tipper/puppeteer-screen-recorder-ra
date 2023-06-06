@@ -105,7 +105,6 @@ export default class PageVideoStreamWriter extends EventEmitter {
   private isWritableStream(destinationSource: string | Writable): boolean {
     if (destinationSource && typeof destinationSource !== 'string') {
       if (
-        !(destinationSource instanceof Writable) ||
         !('writable' in destinationSource) ||
         !destinationSource.writable
       ) {
@@ -251,8 +250,8 @@ export default class PageVideoStreamWriter extends EventEmitter {
   private trimFrame(fameList: pageScreenFrame[], chunckEndTime: number): pageScreenFrame[] {
     return fameList.map((currentFrame: pageScreenFrame, index: number) => {
       const endTime = (index !== fameList.length-1) ? fameList[index+1].timestamp : chunckEndTime;
-      const duration = endTime - currentFrame.timestamp; 
-        
+      const duration = endTime - currentFrame.timestamp;
+
       return {
         ...currentFrame,
         duration,
